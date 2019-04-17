@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [CacheModule.register(), TypeOrmModule.forRoot(), DatabaseModule, RestModule],
+  imports: [CacheModule.register(), TypeOrmModule.forRoot(), RestModule],
   controllers: [AppController],
   providers: [AppService],
 })

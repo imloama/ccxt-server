@@ -8,12 +8,10 @@ export class DatabaseService{
   constructor(
     @InjectRepository(Exchange)
     private readonly exchangeRepo: Repository<Exchange>
-  ){
-
-  }
+  ){  }
 
   async create(ex:Exchange):Promise<Exchange>{
-    return await this.exchangeRepo.create(ex)
+    return await this.exchangeRepo.save(ex);
   }
 
   async findOne(user:string, id:number):Promise<Exchange>{

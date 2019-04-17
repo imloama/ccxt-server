@@ -30,6 +30,6 @@ export class Exchange extends BaseEntity {
   @Column({ length: 255})
   memo?: string;
 
-  @Column()
-  enableRateLimit: boolean = false;
+  @Column({ nullable: false })
+  enableRateLimit?: boolean = false;
 }

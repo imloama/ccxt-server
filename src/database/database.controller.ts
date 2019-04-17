@@ -49,7 +49,9 @@ export class DatabaseController {
     if(!exchanges.includes(exchange.name)){
       return fail(`no exchange named: ${exchange.name}`)
     }
+    console.log(exchange)
     const ex = await this.service.create(exchange);
+    console.log(ex)
     return ok(null, {id: ex.id, name: ex.name, memo: ex.memo,
       enableRateLimit: ex.enableRateLimit})
   }

@@ -1,21 +1,23 @@
 /**
  * exchange rest api
  */
-import { Controller, Get, Param, CACHE_MANAGER, Inject } from '@nestjs/common';
+import { Controller, Get, Param, CACHE_MANAGER, Inject, forwardRef, OnModuleInit } from '@nestjs/common';
 import { DatabaseService } from '../database/database.service'
 import * as ccxt from 'ccxt';
 import { APIResult, ok, fail } from '../vms';
 import { isNull } from 'src/utils';
-const REFLECTOR = 'Reflector';
+import { ModuleRef } from '@nestjs/core';
+import { CcxtService } from './ccxt.service';
 
 @Controller('ex')
-export class ExchangeController {
+export class ExchangeController{
   constructor(
-    private readonly dbService: DatabaseService,
+    private readonly service: CcxtService,
     @Inject(CACHE_MANAGER) private readonly cacheManager: any,
-    @Inject(REFLECTOR) protected readonly reflector: any,
-  ) {}
-  
+  ) {
+    this.dbService = this.service.getService()
+  }
+  private dbService: DatabaseService;
 
   async _getExchangeInstance(user: string, id: number):Promise<ccxt.Exchange>{
     const config = await this.dbService.findOne(user, id)
