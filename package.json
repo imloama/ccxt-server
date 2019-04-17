@@ -5,10 +5,10 @@
   "author": "",
   "license": "MIT",
   "scripts": {
+    "dev:proxy":"cross-env PROXY=http://127.0.0.1:1080 nodemon",
     "webpack:start": "cross-env NODE_ENV=d  node dist/server",
     "webpack": "cross-env NODE_ENV=development webpack --config webpack.config.js",
     "webpack:build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
@@ -37,6 +37,7 @@
     "fastify-rate-limit": "^2.1.1",
     "fastify-swagger": "^2.3.2",
     "helmet": "^3.16.0",
+    "https-proxy-agent": "^2.2.1",
     "mysql": "^2.16.0",
     "pg": "^7.10.0",
     "reflect-metadata": "^0.1.13",

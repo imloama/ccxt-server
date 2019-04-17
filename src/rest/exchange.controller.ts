@@ -8,6 +8,7 @@ import { APIResult, ok, fail } from '../vms';
 import { isNull } from 'src/utils';
 import { ModuleRef } from '@nestjs/core';
 import { CcxtService } from './ccxt.service';
+const HttpsProxyAgent = require('https-proxy-agent');
 
 @Controller('ex')
 export class ExchangeController{
@@ -24,7 +25,14 @@ export class ExchangeController{
     const key = `${user}:${id}:${config.name}`
     let ex = await this.cacheManager.get(key);
     if(!isNull(ex))return ex;
-    ex =  new ccxt[config.name]();
+    const proxy = process.env.PROXY ? process.env.PROXY : null
+    const agent = proxy ? new HttpsProxyAgent(proxy) : null;
+    ex =  new ccxt[config.name]({
+        httpsAgent: agent, 
+        apiKey: config.apikey, 
+        secret: config.secret, 
+        'verbose': false
+    });
     await this.cacheManager.set(key, ex)
     return ex
   }
