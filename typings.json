@@ -1,0 +1,6 @@
+{
+  "globalDependencies": {
+    "csurf": "registry:dt/csurf#1.9.0+20161212190028",
+    "sqlite3": "registry:dt/sqlite3#2.2.3+20160724070935"
+  }
+}

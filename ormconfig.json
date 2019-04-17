@@ -1,0 +1,7 @@
+{
+  "type": "sqlite",
+  "database": "ccxt.db",
+  "entities": ["src/**/*.entity{.ts,.js}"],
+  "synchronize": true,
+  "migrations": ["migration/*.js"]
+}
